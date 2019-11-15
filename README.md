@@ -1,3 +1,4 @@
 # java-derby-agenda
 
-Simple agenda to study java + derby
+Simple agenda program.
+JAVA + DERBY + SQL
