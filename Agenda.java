@@ -7,8 +7,8 @@ public class Agenda{
 		
 	public static void main(String args[]){
 		
-		bd banco 		= new bd();
-		Scanner in 		= new Scanner(System.in);
+		bd banco 	= new bd();
+		Scanner in 	= new Scanner(System.in);
 		String item1 	= new String();
  	
 		System.out.println("\n\nBem vindo ao programa - Agenda Telefonica Simples\n");
@@ -37,7 +37,7 @@ public class Agenda{
 					boolean existemContatosCadastrados = false;
 					while(rs.next()){
 				 
-						int id 			= rs.getInt("id");
+						int id 		= rs.getInt("id");
 						String nome 	= rs.getString("name");
 						String telefone = rs.getString("telefone");
 						
@@ -71,7 +71,7 @@ public class Agenda{
 				
 				String nome = in.nextLine();
 				
-				//verifica se o usu·rio cancelou
+				//verifica se o usu√°rio cancelou
 				if(!nome.equals("0")){ 
 				
 					System.out.print("Digite o telefone de "+ nome +" ou 0 para cancelar: ");
@@ -82,7 +82,6 @@ public class Agenda{
 						
 						int id = banco.geraChaveAgenda();	
 						String query = "insert into agenda values( "+id+" , '" + nome + "', '" + telefone + "' )";
-						//System.out.println(query);
 						
 						try{
 							
@@ -213,7 +212,7 @@ public class Agenda{
 				
 							String nome = in.nextLine();
 				
-							//verifica se o usu·rio cancelou
+							//verifica se o usu√°rio cancelou
 							if(!nome.equals("0")){ 
 				
 								System.out.print("Digite o novo telefone de "+ nome +" ou 0 para cancelar: ");
@@ -320,14 +319,14 @@ class bd {
 			  
 			} catch (SQLException se) {
 				  
-			    System.out.println("N„o foi possÌvel conectar ao banco de dados.");
+			    System.out.println("N√£o foi poss√≠vel conectar ao banco de dados.");
 			    se.printStackTrace();
 			    System.exit(1);
 			    
 			}
 			
 			
-			//verifica se a tabela j· existe no banco. caso n„o exista cria ela.
+			//verifica se a tabela j√° existe no banco. caso n√£o exista cria ela.
 			try{
 			
 				this.selectQuery("select * from agenda");
@@ -369,22 +368,20 @@ class bd {
 	
 		try{
 			
-				ResultSet rs = this.selectQuery("select max(id) as id from agenda");
-				rs.next();
-			 
-				int idmax = rs.getInt("id");
+			ResultSet rs = this.selectQuery("select max(id) as id from agenda");
+			rs.next();
+			int idmax = rs.getInt("id");
+			return idmax + 1;
+			
+		} catch (Exception se) {
 				
-				return idmax + 1;
+			System.out.println("Erro ao gerar o id.");
+			se.printStackTrace();
+			System.exit(1);
 			
-			} catch (Exception se) {
-				
-				System.out.println("Erro ao gerar o id.");
-				se.printStackTrace();
-				System.exit(1);
+		}
 			
-			}
-			
-			return 0;
+		return 0;
 		
 	} 
 	 
